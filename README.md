@@ -15,10 +15,14 @@ $ pip3 --version
 
 1.2 If Python 3 isn't installed, please check this [article](https://docs.python-guide.org/starting/install3/linux/).
 
-
 1.3 Install Python Virtual Environment.
 ```
 $ sudo apt-get install python3-venv
+```
+
+1.4 Install 'dotenv' library.
+```
+$ pip3 install python-dotenv
 ```
 
 ### 2. Virtual Env and Flask Configuration
@@ -82,5 +86,4 @@ deactivate
 
 ## Information links
 * [Flask Documentation](http://flask.pocoo.org/)
-
-
+* [PyPI - python-dotenv](https://pypi.org/project/python-dotenv/)
