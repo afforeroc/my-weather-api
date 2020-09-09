@@ -65,7 +65,8 @@ export FLASK_APP=app.py
 export FLASK_ENV=development
 ```
 
-2.8 Run more easier.
+## 3. Running app
+3.1 Run the app with Flask environment variables. 
 ```
 flask run
 ```
@@ -75,6 +76,56 @@ flask run
 > If you need deactivate your virtual env.
 ```
 deactivate
+```
+
+3.2 Go to [http://127.0.0.1:5000/](http://127.0.0.1:5000/) and you should see data like this:
+```
+// 20200909183346
+// http://127.0.0.1:5000/
+
+{
+  "base": "stations",
+  "clouds": {
+    "all": 49
+  },
+  "cod": 200,
+  "coord": {
+    "lat": 4.61,
+    "lon": -74.08
+  },
+  "dt": 1599694362,
+  "id": 3688689,
+  "main": {
+    "feels_like": 283.25,
+    "grnd_level": 749,
+    "humidity": 86,
+    "pressure": 1014,
+    "sea_level": 1014,
+    "temp": 284.54,
+    "temp_max": 284.54,
+    "temp_min": 284.54
+  },
+  "name": "Bogotá",
+  "sys": {
+    "country": "CO",
+    "sunrise": 1599648520,
+    "sunset": 1599692318
+  },
+  "timezone": -18000,
+  "visibility": 10000,
+  "weather": [
+    {
+      "description": "scattered clouds",
+      "icon": "03n",
+      "id": 802,
+      "main": "Clouds"
+    }
+  ],
+  "wind": {
+    "deg": 125,
+    "speed": 1.58
+  }
+}
 ```
 
 ## Reference links

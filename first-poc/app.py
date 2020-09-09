@@ -32,15 +32,17 @@ def beautiful_json(data_json):
 
 
 app = Flask(__name__)
-api_url, api_key = load_env_owmap('.env')
+#api_url, api_key = load_env_owmap('.env')
+
 
 @app.route('/')
 def example():
     """Return a sample JSON response."""
-    #owmap_response = openweathermap_api(api_url, api_key, 'Bogota')
-    #json_data = json.loads(owmap_response)
-    #beautiful_json(json_data)
-    return '{"name":"Bob"}'
+    api_url, api_key = load_env_owmap('.env')
+    owmap_response = openweathermap_api(api_url, api_key, 'Bogota')
+    json_data = json.loads(owmap_response)
+    beautiful_json(json_data)
+    return json_data
 
 
 if __name__ == '__main__':
