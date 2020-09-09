@@ -25,7 +25,7 @@ $ sudo apt-get install python3-venv
 2.1 Enter inside app folder.
 ```
 $ cd first-poc/
-``
+```
 
 2.2 Create a Python virtual environment.
 ```
@@ -77,7 +77,7 @@ deactivate
 * [The Hitchhiker’s Guide to Python - Installing Python 3 on Linux](https://docs.python-guide.org/starting/install3/linux/)
 * [Pythonise - Your first Flask app | Learning Flask Ep. 1](https://pythonise.com/series/learning-flask/your-first-flask-app)
 * [Create and configure a Flask app to deploy on Cloud Foundry](https://github.com/afforeroc/flask-cf)
-* [How to build a JSON API with Python](https://www.freecodecamp.org/news/build-a-simple-json-api-in-python/)
+* [freeCodeCamp - How to build a JSON API with Python](https://www.freecodecamp.org/news/build-a-simple-json-api-in-python/)
 
 
 ## Information links
