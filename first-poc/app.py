@@ -4,8 +4,9 @@ import os
 import json
 import datetime
 import urllib.request
+import re
 from dotenv import load_dotenv
-from flask import Flask, request, jsonify
+from flask import Flask, abort, request, jsonify
 
 
 def load_env_owmap(env_file):
@@ -140,6 +141,24 @@ def create_response_body(input_json):
     #output_json = json.dumps(json_response, indent=4, sort_keys=False)
     return jsonify(json_response)
 
+def check_args(city, country):
+    """..."""
+    # For city
+    if city is None or city == '':
+        abort(400)
+    else:
+        pattern = re.compile("[A-Za-z]+")
+        if pattern.fullmatch(city) is None:
+            abort(400)
+    
+    # For country            
+    if country is None or country == '':
+        abort(400)
+    else:
+        pattern = re.compile("[a-z]{2}")
+        if pattern.fullmatch(country) is None:
+            abort(400)
+
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
@@ -151,12 +170,13 @@ def weather():
     """Return a sample JSON response."""
     city  = request.args.get('city', None)
     country  = request.args.get('country', None)
-    print("city =>", city)
-    print("country =>", country)
+    # Verify that exist and the args is correct
+    check_args(city, country)
+    
     api_url, api_key = load_env_owmap('.env')
     owmap_response = openweathermap_api(api_url, api_key, 'Bogota')
     input_json = json.loads(owmap_response)
-    beautiful_json(input_json)
+    #beautiful_json(input_json)
     output_json = create_response_body(input_json)
     return output_json
 
