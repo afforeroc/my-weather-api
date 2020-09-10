@@ -80,7 +80,17 @@ flask run
 deactivate
 ```
 
-3.2 Go to [http://127.0.0.1:5000/](http://127.0.0.1:5000/) and you should see data like this:
+### 4. Make the request to the Web API
+4.1 Edit the '<>' fields and put the required args.
+```
+http://127.0.0.1:5000/weather?city=<city>&country=<co>
+```
+Remember this:
+* city: a string name without numbers or special characters.
+* country: a string with only two lower letters without numbers or special characters.
+
+4.2 After that, put the URL on your favorite web browser and check the response on JSON format.
+> Example response from Web API
 ```
 {
   "location_name": "Bogotá, CO",
