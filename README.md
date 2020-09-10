@@ -135,7 +135,7 @@ Response:  {
 
 6. Use environment variables for configuration :heavy_check_mark: 
 
-7. Log errors to the terminal using a middleware
+7. Log errors to the terminal using a middleware :construction:
 
 8. The response must include the content-type header (application/JSON) :heavy_check_mark:
 * Check via console

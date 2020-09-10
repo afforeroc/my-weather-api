@@ -7,7 +7,8 @@ import urllib.request
 import re
 from dotenv import load_dotenv
 from flask import Flask, abort, request, jsonify, Response
-
+import loggermiddleware
+from loggermiddleware import LoggerMiddleware
 
 def load_env_owmap(env_file):
     """Load auth settings for OpenWeatherMap."""
@@ -161,6 +162,7 @@ def check_args(city, country):
 
 
 app = Flask(__name__)
+app.wsgi_app = LoggerMiddleware(app.wsgi_app)
 app.config["DEBUG"] = True
 app.config['JSON_SORT_KEYS'] = False
 
