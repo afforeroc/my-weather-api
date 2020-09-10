@@ -5,7 +5,7 @@ import json
 import datetime
 import urllib.request
 from dotenv import load_dotenv
-from flask import Flask
+from flask import Flask, request, jsonify
 
 
 def load_env_owmap(env_file):
@@ -27,8 +27,8 @@ def openweathermap_api(api_url, api_key, city=None):
 
 def beautiful_json(data_json):
     """Print in console a JSON data in beautiful style."""
-    json_data = json.dumps(data_json, indent=2,
-                           ensure_ascii=False).encode('utf8')
+    json_data = json.dumps(data_json, indent=4,
+                           ensure_ascii=False, sort_keys=False).encode('utf8')
     print(json_data.decode())
 
 
@@ -137,20 +137,26 @@ def create_response_body(input_json):
         "geo_coordinates": geo_coordinates,
         "requested_time": requested_time
     }
-    output_json = json.dumps(json_response, indent=4, sort_keys=False)
-    return output_json
+    #output_json = json.dumps(json_response, indent=4, sort_keys=False)
+    return jsonify(json_response)
 
 
 app = Flask(__name__)
+app.config["DEBUG"] = True
+app.config['JSON_SORT_KEYS'] = False
 
-@app.route('/')
-def example():
+# /weather?city=$City&country=$Country
+@app.route('/weather', methods =['GET'])
+def weather():
     """Return a sample JSON response."""
+    city  = request.args.get('city', None)
+    country  = request.args.get('country', None)
+    print("city =>", city)
+    print("country =>", country)
     api_url, api_key = load_env_owmap('.env')
     owmap_response = openweathermap_api(api_url, api_key, 'Bogota')
     input_json = json.loads(owmap_response)
     beautiful_json(input_json)
-    print(json.dumps(input_json, indent=4, sort_keys=False))
     output_json = create_response_body(input_json)
     return output_json
 

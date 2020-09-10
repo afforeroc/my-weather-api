@@ -104,9 +104,11 @@ deactivate
 * [freeCodeCamp - How to build a JSON API with Python](https://www.freecodecamp.org/news/build-a-simple-json-api-in-python/)
 * [Medium - OSError: [Errno 98] Address already in use Flask error](https://medium.com/@tessywangari05/oserror-errno-98-address-already-in-use-flask-error-ccbff65e2bb5)
 * [tutorialspoint - How to convert unix timestamp string to readable date in Python?](https://www.tutorialspoint.com/How-to-convert-unix-timestamp-string-to-readable-date-in-Python#:~:text=How%20to%20convert%20unix%20timestamp%20string%20to%20readable%20date%20in%20Python%3F,-PythonServer%20Side&text=You%20can%20use%20the%20fromtimestamp,object%20corresponding%20to%20the%20timestamp.)
+* [GeekforGeeks - Create a Weather app using Flask | Python](https://www.geeksforgeeks.org/create-a-weather-app-using-flask-python/)
 
 
 ## Information links
 * [Flask Documentation](http://flask.pocoo.org/)
 * [PyPI - python-dotenv](https://pypi.org/project/python-dotenv/)
-* [OpenWeather - JSON response](https://openweathermap.org/current#current_JSON)
+* [OpenWeather - Weather parameters in API response - JSON response](https://openweathermap.org/current#current_JSON)
+* [stackoverflow - Prevent Flask jsonify from sorting the data](https://stackoverflow.com/questions/43263356/prevent-flask-jsonify-from-sorting-the-data/43263483)
