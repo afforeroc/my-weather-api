@@ -80,51 +80,20 @@ deactivate
 
 3.2 Go to [http://127.0.0.1:5000/](http://127.0.0.1:5000/) and you should see data like this:
 ```
-// 20200909183346
-// http://127.0.0.1:5000/
-
 {
-  "base": "stations",
-  "clouds": {
-    "all": 49
-  },
-  "cod": 200,
-  "coord": {
-    "lat": 4.61,
-    "lon": -74.08
-  },
-  "dt": 1599694362,
-  "id": 3688689,
-  "main": {
-    "feels_like": 283.25,
-    "grnd_level": 749,
-    "humidity": 86,
-    "pressure": 1014,
-    "sea_level": 1014,
-    "temp": 284.54,
-    "temp_max": 284.54,
-    "temp_min": 284.54
-  },
-  "name": "Bogotá",
-  "sys": {
-    "country": "CO",
-    "sunrise": 1599648520,
-    "sunset": 1599692318
-  },
-  "timezone": -18000,
-  "visibility": 10000,
-  "weather": [
-    {
-      "description": "scattered clouds",
-      "icon": "03n",
-      "id": 802,
-      "main": "Clouds"
-    }
+  "location_name": "Bogotá, CO",
+  "temperature": "11 °C",
+  "wind": "1.0 m/s, 0 deg",
+  "cloudines": "Broken clouds",
+  "pressure": "1030 hPa",
+  "humidity": "87%",
+  "sunrise": "05:48",
+  "sunset": "17:58",
+  "geo_coordinates": [
+    "4.61",
+    "-74.08"
   ],
-  "wind": {
-    "deg": 125,
-    "speed": 1.58
-  }
+  "requested_time": "2020-09-09 22:45:02"
 }
 ```
 
@@ -133,8 +102,11 @@ deactivate
 * [Pythonise - Your first Flask app | Learning Flask Ep. 1](https://pythonise.com/series/learning-flask/your-first-flask-app)
 * [Create and configure a Flask app to deploy on Cloud Foundry](https://github.com/afforeroc/flask-cf)
 * [freeCodeCamp - How to build a JSON API with Python](https://www.freecodecamp.org/news/build-a-simple-json-api-in-python/)
+* [Medium - OSError: [Errno 98] Address already in use Flask error](https://medium.com/@tessywangari05/oserror-errno-98-address-already-in-use-flask-error-ccbff65e2bb5)
+* [tutorialspoint - How to convert unix timestamp string to readable date in Python?](https://www.tutorialspoint.com/How-to-convert-unix-timestamp-string-to-readable-date-in-Python#:~:text=How%20to%20convert%20unix%20timestamp%20string%20to%20readable%20date%20in%20Python%3F,-PythonServer%20Side&text=You%20can%20use%20the%20fromtimestamp,object%20corresponding%20to%20the%20timestamp.)
 
 
 ## Information links
 * [Flask Documentation](http://flask.pocoo.org/)
 * [PyPI - python-dotenv](https://pypi.org/project/python-dotenv/)
+* [OpenWeather - JSON response](https://openweathermap.org/current#current_JSON)
