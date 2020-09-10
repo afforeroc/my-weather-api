@@ -6,7 +6,7 @@ import datetime
 import urllib.request
 import re
 from dotenv import load_dotenv
-from flask import Flask, abort, request, jsonify
+from flask import Flask, abort, request, jsonify, Response
 
 
 def load_env_owmap(env_file):
@@ -126,7 +126,7 @@ def create_response_body(input_json):
     geo_coordinates = get_coordinates(input_json)
     requested_time = get_requested_time(input_json)
 
-    json_response = {
+    output_json = {
         "location_name": location_name,
         "temperature": temperature,
         "wind": wind,
@@ -139,7 +139,7 @@ def create_response_body(input_json):
         "requested_time": requested_time
     }
     #output_json = json.dumps(json_response, indent=4, sort_keys=False)
-    return jsonify(json_response)
+    return output_json
 
 def check_args(city, country):
     """..."""
@@ -177,8 +177,10 @@ def weather():
     owmap_response = openweathermap_api(api_url, api_key, 'Bogota')
     input_json = json.loads(owmap_response)
     #beautiful_json(input_json)
+    
     output_json = create_response_body(input_json)
-    return output_json
+    return jsonify(output_json)
+    #return output_json
 
 
 if __name__ == '__main__':

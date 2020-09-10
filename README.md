@@ -137,7 +137,8 @@ Response:  {
 
 7. Log errors to the terminal using a middleware
 
-8. The response must include the content-type header (application/JSON)
+8. The response must include the content-type header (application/JSON) :heavy_check_mark:
+* Check via console
 
 9. Functions must be tested
 
@@ -151,11 +152,16 @@ Response:  {
 * [Medium - OSError: [Errno 98] Address already in use Flask error](https://medium.com/@tessywangari05/oserror-errno-98-address-already-in-use-flask-error-ccbff65e2bb5)
 * [tutorialspoint - How to convert unix timestamp string to readable date in Python?](https://www.tutorialspoint.com/How-to-convert-unix-timestamp-string-to-readable-date-in-Python#:~:text=How%20to%20convert%20unix%20timestamp%20string%20to%20readable%20date%20in%20Python%3F,-PythonServer%20Side&text=You%20can%20use%20the%20fromtimestamp,object%20corresponding%20to%20the%20timestamp.)
 * [GeekforGeeks - Create a Weather app using Flask | Python](https://www.geeksforgeeks.org/create-a-weather-app-using-flask-python/)
-* [stackoverflow - Prevent Flask jsonify from sorting the data](https://stackoverflow.com/questions/43263356/prevent-flask-jsonify-from-sorting-the-data/43263483)
-* [stackoverflow - Multiple parameters in in Flask approute](https://stackoverflow.com/questions/15182696/multiple-parameters-in-in-flask-approute)
+* [Stack Overflow - Prevent Flask jsonify from sorting the data](https://stackoverflow.com/questions/43263356/prevent-flask-jsonify-from-sorting-the-data/43263483)
+* [Stack Overflow - Multiple parameters in in Flask approute](https://stackoverflow.com/questions/15182696/multiple-parameters-in-in-flask-approute)
+* [Stack Overflow - flask restful: passing parameters to GET request](https://stackoverflow.com/questions/30779584/flask-restful-passing-parameters-to-get-request)
+* [Stack Overflow - How to check that a string contains only “a-z”, “A-Z” and “0-9” characters](https://stackoverflow.com/questions/57011986/how-to-check-that-a-string-contains-only-a-z-a-z-and-0-9-characters)
+* [Stack Overflow - Regex to check if first 2 characters in a string are Alphabets](https://stackoverflow.com/questions/6311030/regex-to-check-if-first-2-characters-in-a-string-are-alphabets/6311081)
+* [Stack Overflow - Forcing application/json MIME type in a view (Flask)](https://stackoverflow.com/questions/11945523/forcing-application-json-mime-type-in-a-view-flask)
 
 
 ## Information links
 * [Flask Documentation](http://flask.pocoo.org/)
 * [PyPI - python-dotenv](https://pypi.org/project/python-dotenv/)
 * [OpenWeather - Weather parameters in API response - JSON response](https://openweathermap.org/current#current_JSON)
+* [Rafael Xavier de Souza - Complete list of github markdown emoji markup](https://gist.github.com/rxaviers/7360908)
