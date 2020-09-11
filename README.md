@@ -136,7 +136,7 @@ $ deactivate
 ```
 http://127.0.0.1:5000/weather?city=<>&country=<xx>
 ```
-e.g.<br>
+>e.g.<br>
 city=**Bogota** (Bogotá DC), country=**co** (Colombia).
 ```
 http://127.0.0.1:5000/weather?city=Bogota&country=co
@@ -149,7 +149,7 @@ http://127.0.0.1:5000/weather?city=Bogota&country=co
 Please check the [List of ISO 3166 country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) for the available country codes that is possible to use.
 
 5.3 After that, put the URL on your favorite web browser and check the response on JSON format.<br>
-e.g.
+>e.g.
 ```
 {
   "location_name": "Bogotá, CO",
@@ -169,9 +169,9 @@ e.g.
 ```
 
 5.4 Check by console.<br>
-e.g.
+>e.g.
 ```
-**user@user**:~$ curl "http://127.0.0.1:5000/weather?city=bogota&country=co"
+user@user:~$ curl "http://127.0.0.1:5000/weather?city=bogota&country=co"
 {
   "location_name": "Bogotá, CO", 
   "temperature": "12 °C", 
@@ -189,9 +189,9 @@ e.g.
 }
 ```
 
-e.g.
+>e.g.
 ```
-**user@user**:~$ curl -s -I "http://127.0.0.1:5000/weather?city=bogota&country=co"
+user@user:~$ curl -s -I "http://127.0.0.1:5000/weather?city=bogota&country=co"
 HTTP/1.0 200 OK
 Content-Type: application/json
 Content-Length: 330
