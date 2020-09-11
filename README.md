@@ -167,7 +167,7 @@ e.g.
 }
 ```
 
-## Development - pending feactures
+## Development: status of feactures
 Feactures completed and pending to construct.
 
 1. GET /weather?city=$City&country=$Country :heavy_check_mark:
@@ -185,9 +185,9 @@ Response:  {
     "requested_time": "2018-01-09 11:57:00"
 }
 ```
-2. City is a string. Example: Bogota :heavy_check_mark:
+2. City is a string. Example: Bogota :heavy_check_mark: :heavy_check_mark:
 
-3. Country is a country code of two characters in lowercase. Example: co :heavy_check_mark:
+3. Country is a country code of two characters in lowercase. Example: co :heavy_check_mark: :heavy_check_mark:
 
 4. This endpoint should use an external API to get the proper info, here is an example: http://api.openweathermap.org/data/2.5/weather?q=Bogota,co&appid=1508a9a4840a5574c822d70ca2132032 :heavy_check_mark:
 
@@ -200,7 +200,7 @@ Response:  {
 8. The response must include the content-type header (application/JSON) :heavy_check_mark:
 * Check via console :construction:
 
-9. Functions must be tested
+9. Functions must be tested :construction:
 
 10. Keep a cache of 2 minutes of the data. You can use a persistent layer for this.
 
