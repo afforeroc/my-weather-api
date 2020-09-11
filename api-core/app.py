@@ -7,19 +7,8 @@ import urllib.request
 import re
 import sys
 from dotenv import load_dotenv
-from flask import Flask, abort, request, jsonify, Request
-from loggermiddleware import LoggerMiddleware
-
-class Middleware:
-    def __init__(self, app):
-        self.app = app
-
-    def __call__(self, environ, start_response):
-        # not Flask request - from werkzeug.wrappers import Request
-        request = Request(environ)
-        print('--> PATH: %s, URL: %s' % (request.path, request.url))
-        # just do here everything what you need
-        return self.app(environ, start_response)
+from flask import Flask, abort, request, jsonify
+from loggermiddleware import Middleware
 
 
 def check_file(pathfile):
@@ -85,9 +74,8 @@ def check_country(country):
 def openweathermap_api(api_url, api_key, city_country):
     """Request weather data from OpenWeatherMap."""
     # source contain json data from api
-    json_data = urllib.request.urlopen(api_url + city_country + 
-                                        '&units=metric&appid=' + 
-                                        api_key).read()
+    request_api = str(api_url) + str(city_country) + '&units=metric&appid=' + str(api_key)
+    json_data = urllib.request.urlopen(request_api).read()
     return json_data
 
 
@@ -206,24 +194,23 @@ def create_response_body(input_json):
     #output_json = json.dumps(json_response, indent=4, sort_keys=False)
     return output_json
 
+
 app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
 app.config['JSON_AS_ASCII'] = False
-app.wsgi_app = Middleware(app.wsgi_app)
+app.config.from_pyfile('settings.py')
 
 # /weather?city=$City&country=$Country
 @app.route('/weather', methods =['GET'])
 def weather():
     """Main function of Weather API."""
+    app.wsgi_app = Middleware(app.wsgi_app)
     
     # Files validator
     check_file('.flaskenv')
     check_file('.env')
     check_file('settings.py')
-
-    #
     
-
     # Check main args: city and country
     city  = request.args.get('city', None)
     country  = request.args.get('country', None)
@@ -240,12 +227,10 @@ def weather():
     api_url = app.config.get("API_URL")
     api_key = app.config.get("API_KEY")
 
-
     # Core functions
     city_country = f"{city},{country}"
     owmap_response = openweathermap_api(api_url, api_key, city_country)
     input_json = json.loads(owmap_response)
-    
     output_json = create_response_body(input_json)
     return jsonify(output_json)
 
