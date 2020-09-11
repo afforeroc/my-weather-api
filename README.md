@@ -4,13 +4,16 @@ This service is free and use data from OpenWeather API.
 
 ## Prerequisites
 * Ubuntu 20.04 LTS
+* Python3 v3.8.2
+* pip3 v20.2.3
+* Flask v1.1.2
 
 ## Guideline
 
 ### 1. System configuration
 > Do it only once for configure the app
 
-1.1 Check if Python 3 is already installed in your Operative System.
+**1.1** Check if Python 3 is already installed in your Operative System.
 ```
 $ python3 --version
 ```
@@ -18,14 +21,14 @@ $ python3 --version
 $ pip3 --version
 ```
 
-1.2 If Python 3 isn't installed, please check this [article](https://docs.python-guide.org/starting/install3/linux/).
+**1.2** If Python 3 isn't installed, please check this [article](https://docs.python-guide.org/starting/install3/linux/).
 
-1.3 Install Python Virtual Environment, a manager of enviroment for Python packages.
+**1.3** Install Python Virtual Environment, a manager of enviroment for Python packages.
 ```
 $ sudo apt-get install python3-venv
 ```
 
-1.4 Install 'dotenv' library, a manager of environment variables for API keys, API URLs, config settings, etc.
+**1.4** Install 'dotenv' library, a manager of environment variables for API keys, API URLs, config settings, etc.
 ```
 $ pip3 install python-dotenv
 ```
@@ -33,27 +36,27 @@ $ pip3 install python-dotenv
 ### 2. Python enviroment configuration
 > Do it only once for configure the app
 
-2.1 Enter inside app folder.
+**2.1** Enter inside app folder.
 ```
 $ cd api-core/
 ```
 
-2.2 Create a Python virtual environment.
+**2.2** Create a Python virtual environment.
 ```
 $ python3 -m venv env
 ```
 
-2.3 Activate the environment.
+**2.3** Activate the environment.
 ```
 $ source env/bin/activate
 ```
 
-2.4 Updating pip3 for the virtual env.
+**2.4** Updating pip3 for the virtual env.
 ```
 $ pip3 install --upgrade pip
 ```
 
-2.5 Installing Flask and check the associated packages.
+**2.5** Installing Flask and check the associated packages.
 ```
 $ pip3 install flask
 ```
@@ -61,18 +64,18 @@ $ pip3 install flask
 $ pip3 list
 ```
 
-2.6 Check the first app running.
+**2.6** Check the first app running.
 ```
 $ python3 app.py
 ```
 
-2.7 Config Flask environment variables.
+**2.7** Config Flask environment variables.
 ```
 export FLASK_APP=app.py
 export FLASK_ENV=development
 ```
 
-2.8 Deactivate the virtual env.
+**2.8** Deactivate the virtual env.
 ```
 deactivate
 ```
@@ -80,68 +83,75 @@ deactivate
 ### 3. Dot enviroment configuration
 > Do it only once for configure the app
 
-3.1 Enter inside app folder.
+**3.1** Enter inside app folder.
 ```
 $ cd api-core/
 ```
 
-3.2 Edit the `new.env` file and put the requerired URL and key for the OpenWeather API of [Current Weather Data](https://openweathermap.org/current).<br>
+**3.2** Edit the `new.env` file and put the requerired URL and key for the OpenWeather API of [Current Weather Data](https://openweathermap.org/current).<br>
 e.g.
 ```
 api_url='http://api.openweathermap.org/data/2.5/weather?q='
 api_key='1234a5b6789c2357d111d31ef7192989'
 ```
-After that, save it and rename the file like this:
-'new.env' -> '.env'
+
+**3.3** After that, save it and rename the file like this:
+> Before
+```
+new.env
+```
+> After
+```
+.env
+```
 
 ### 4. Run the app
 > Do it every time when you run the app
 
-4.1 Enter inside app folder.
+**4.1** Enter inside app folder.
 ```
 $ cd api-core/
 ```
 
-4.2 Activate the environment.
+**4.2** Activate the environment.
 ```
 $ source env/bin/activate
 ```
 
-4.3 Run the app with Flask environment variables. 
+**4.3** Run the app with Flask environment variables. 
 ```
 $ flask run
 ```
 
-4.4 Make your API request. Please see **5. Make the request to the Web API** section of this.
+**4.4** Make your API request. Please see **5. Make the API request** section of this.
 
-4.5 Stop the app with <kbd>ctrl</kbd> + <kbd>C</kbd>.
+**4.5** Stop the app with <kbd>ctrl</kbd> + <kbd>C</kbd>.
 
-4.6 I recommended deactivate your virtual env, if you are not going to run the application anymore.
+**4.6** I recommended deactivate your virtual env, if you are not going to run the application anymore.
 ```
 $ deactivate
 ```
 
-### 5. Make the request to the Web API
+### 5. Make the API request
 > Do it every time when you run the app
 
-5.1 Edit the `<>` fields and put the required args.
+**5.1** Edit the following URL template and replace the `<...>` fields and put the required args.
 ```
-http://127.0.0.1:5000/weather?city=<city>&country=<xx>
+http://127.0.0.1:5000/weather?city=<>&country=<xx>
 ```
-
-Edit like this: city=Bogota (Bogotá DC), country=co (Colombia).<br>
-e.g.
+e.g.<br>
+city=**Bogota** (Bogotá DC), country=**co** (Colombia).
 ```
 http://127.0.0.1:5000/weather?city=Bogota&country=co
 ```
 
-5.2 Remember:
-* **city**: a string name without numbers or special characters.
-* **country**: a string with only two lower letters without numbers or special characters.
+**5.2** Remember:
+**city**: a string name without numbers or special characters.<br>
+**country**: a string with only two lower letters without numbers or special characters.
 
 Please check the [List of ISO 3166 country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) for the available country codes that is possible to use.
 
-5.3 After that, put the URL on your favorite web browser and check the response on JSON format.
+**5.3** After that, put the URL on your favorite web browser and check the response on JSON format.<br>
 e.g.
 ```
 {
@@ -161,9 +171,9 @@ e.g.
 }
 ```
 
-## Development - pending elements
+## Development - pending feactures
 Feactures completed and pending to construct.
-1. GET /weather?city=$City&country=$Country :heavy_check_mark:
+**1.** GET /weather?city=$City&country=$Country :heavy_check_mark:
 ```
 Response:  {
     "location_name": "Bogota, CO",
@@ -178,27 +188,36 @@ Response:  {
     "requested_time": "2018-01-09 11:57:00"
 }
 ```
-2. City is a string. Example: Bogota :heavy_check_mark:
+**2.** City is a string. Example: Bogota :heavy_check_mark:
 
-3. Country is a country code of two characters in lowercase. Example: co :heavy_check_mark:
+**3.** Country is a country code of two characters in lowercase. Example: co :heavy_check_mark:
 
-4. This endpoint should use an external API to get the proper info, here is an example: http://api.openweathermap.org/data/2.5/weather?q=Bogota,co&appid=1508a9a4840a5574c822d70ca2132032 :heavy_check_mark:
+**4.** This endpoint should use an external API to get the proper info, here is an example: http://api.openweathermap.org/data/2.5/weather?q=Bogota,co&appid=1508a9a4840a5574c822d70ca2132032 :heavy_check_mark:
 
-5. The data must be human-readable :heavy_check_mark:
+**5.** The data must be human-readable :heavy_check_mark:
 
-6. Use environment variables for configuration :heavy_check_mark: 
+**6.** Use environment variables for configuration :heavy_check_mark: 
 
-7. Log errors to the terminal using a middleware :construction:
+**7.** Log errors to the terminal using a middleware :construction:
 
-8. The response must include the content-type header (application/JSON) :heavy_check_mark:
+**8.** The response must include the content-type header (application/JSON) :heavy_check_mark:
 * Check via console :construction:
 
-9. Functions must be tested
+**9.** Functions must be tested
 
-10. Keep a cache of 2 minutes of the data. You can use a persistent layer for this.
+**10.** Keep a cache of 2 minutes of the data. You can use a persistent layer for this.
+
+
+## Reference links
+* [Flask Documentation](http://flask.pocoo.org/)
+* [PyPI - python-dotenv](https://pypi.org/project/python-dotenv/)
+* [OpenWeather - Weather parameters in API response - JSON response](https://openweathermap.org/current#current_JSON)
+* [OpenWeather - Current Weather Data API](https://openweathermap.org/current)
+* [List of ISO 3166 country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
+* [Rafael Xavier de Souza - Complete list of github markdown emoji markup](https://gist.github.com/rxaviers/7360908)
 
 <!--
-## Reference links
+## Information source
 * [The Hitchhiker’s Guide to Python - Installing Python 3 on Linux](https://docs.python-guide.org/starting/install3/linux/)
 * [Pythonise - Your first Flask app | Learning Flask Ep. 1](https://pythonise.com/series/learning-flask/your-first-flask-app)
 * [Create and configure a Flask app to deploy on Cloud Foundry](https://github.com/afforeroc/flask-cf)
@@ -213,11 +232,3 @@ Response:  {
 * [Stack Overflow - Regex to check if first 2 characters in a string are Alphabets](https://stackoverflow.com/questions/6311030/regex-to-check-if-first-2-characters-in-a-string-are-alphabets/6311081)
 * [Stack Overflow - Forcing application/json MIME type in a view (Flask)](https://stackoverflow.com/questions/11945523/forcing-application-json-mime-type-in-a-view-flask)
 -->
-
-## Information links
-* [Flask Documentation](http://flask.pocoo.org/)
-* [PyPI - python-dotenv](https://pypi.org/project/python-dotenv/)
-* [OpenWeather - Weather parameters in API response - JSON response](https://openweathermap.org/current#current_JSON)
-* [OpenWeather - Current Weather Data API](https://openweathermap.org/current)
-* [List of ISO 3166 country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
-* [Rafael Xavier de Souza - Complete list of github markdown emoji markup](https://gist.github.com/rxaviers/7360908)
