@@ -5,8 +5,6 @@ import json
 import datetime
 import urllib.request
 import re
-import sys
-from dotenv import load_dotenv
 from flask import Flask, abort, request, jsonify
 from loggermiddleware import Middleware
 
@@ -28,7 +26,7 @@ def check_file(pathfile):
     else:
         print(f"OK: '{pathfile}' file exits and is not empty")
 
-    
+
 def check_empty(arg_name, arg):
     """Check if a arg are not None or empty."""
     if arg is None or arg == '':
@@ -44,45 +42,56 @@ def check_empty(arg_name, arg):
 def check_city(city):
     """Check if 'city' arg is a string composed only by with letters."""
     city_str = str(city)
-    reg_expr = "[A-Za-z ]+" # String composed only by with letters
+    reg_expr = "[A-Za-z ]+"  # String composed only by with letters
     pattern = re.compile(reg_expr)
     if pattern.fullmatch(city) is None:
         print("----------------------")
         print("EXTERNAL ERROR: Bad request by wrong syntax")
-        print(f"Oops! city => '{city_str}' not match with '{reg_expr}' regex expression")
+        print(
+            f"Oops! city => '{city_str}' not match with '{reg_expr}' regex expression"
+        )
         print("----------------------")
         abort(400)
     else:
-        print(f"OK: city (arg) => '{city_str}' match with '{reg_expr}' regex expression")
+        print(
+            f"OK: city (arg) => '{city_str}' match with '{reg_expr}' regex expression"
+        )
 
 
 def check_country(country):
     """Check if 'country' arg is a lower string with only two letters."""
     country_str = str(country)
-    reg_expr = "[a-z]{2}" # Lower string with only two letters
+    reg_expr = "[a-z]{2}"  # Lower string with only two letters
     pattern = re.compile(reg_expr)
     if pattern.fullmatch(country_str) is None:
         print("----------------------")
         print("EXTERNAL ERROR: Bad request by wrong syntax")
-        print(f"Oops! country => '{country_str}' not match with '{reg_expr}' regex expression")
+        print(
+            f"Oops! country => '{country_str}' not match with '{reg_expr}' regex expression"
+        )
         print("----------------------")
         abort(400)
     else:
-        print(f"OK: country (arg) => '{country_str}' match with '{reg_expr}' regex expression")
+        print(
+            f"OK: country (arg) => '{country_str}' match with '{reg_expr}' regex expression"
+        )
 
 
 def openweathermap_api(api_url, api_key, city_country):
     """Request weather data from OpenWeatherMap."""
     # source contain json data from api
-    request_api = str(api_url) + str(city_country) + '&units=metric&appid=' + str(api_key)
+    request_api = str(api_url) + str(
+        city_country) + '&units=metric&appid=' + str(api_key)
     json_data = urllib.request.urlopen(request_api).read()
     return json_data
 
 
 def beautiful_json(data_json):
     """Print in console a JSON data in beautiful style."""
-    json_data = json.dumps(data_json, indent=4,
-                           ensure_ascii=False, sort_keys=False).encode('utf8')
+    json_data = json.dumps(data_json,
+                           indent=4,
+                           ensure_ascii=False,
+                           sort_keys=False).encode('utf8')
     print(json_data.decode())
 
 
@@ -200,20 +209,21 @@ app.config['JSON_SORT_KEYS'] = False
 app.config['JSON_AS_ASCII'] = False
 app.config.from_pyfile('settings.py')
 
+
 # /weather?city=$City&country=$Country
-@app.route('/weather', methods =['GET'])
+@app.route('/weather', methods=['GET'])
 def weather():
     """Main function of Weather API."""
     app.wsgi_app = Middleware(app.wsgi_app)
-    
+
     # Files validator
     check_file('.flaskenv')
     check_file('.env')
     check_file('settings.py')
-    
+
     # Check main args: city and country
-    city  = request.args.get('city', None)
-    country  = request.args.get('country', None)
+    city = request.args.get('city', None)
+    country = request.args.get('country', None)
     check_empty('city', city)
     check_empty('country', country)
     check_city(city)
