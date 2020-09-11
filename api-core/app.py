@@ -6,8 +6,7 @@ import datetime
 import urllib.request
 import re
 from dotenv import load_dotenv
-from flask import Flask, abort, request, jsonify, Response
-import loggermiddleware
+from flask import Flask, abort, request, jsonify
 from loggermiddleware import LoggerMiddleware
 
 
@@ -57,16 +56,6 @@ def check_country(country):
         abort(400)
     else:
         print(f"country => '{country_str}', country arg:\tOK")
-
-
-
-def load_env_owmap(env_file):
-    """Load URL and key of OpenWeather API."""
-    dotenv_path = os.path.join(os.path.dirname(__file__), env_file)
-    load_dotenv(dotenv_path)
-    api_url = os.getenv('api_url')
-    api_key = os.getenv('api_key')
-    return api_url, api_key
 
 
 def openweathermap_api(api_url, api_key, city_country):
@@ -195,13 +184,15 @@ def create_response_body(input_json):
 
 
 app = Flask(__name__)
-app.wsgi_app = LoggerMiddleware(app.wsgi_app)
-app.config['JSON_SORT_KEYS'] = False
 
 # /weather?city=$City&country=$Country
 @app.route('/weather', methods =['GET'])
 def weather():
     """Main function of Weather API."""
+    
+    app.config.from_pyfile('settings.py')
+    app.wsgi_app = LoggerMiddleware(app.wsgi_app)
+    app.config['JSON_SORT_KEYS'] = False
 
     # Initial validators
     check_file('.env')
@@ -217,7 +208,9 @@ def weather():
     country = str(country)
 
     # Load env variables
-    api_url, api_key = load_env_owmap('.env')
+    api_url = app.config.get("API_URL")
+    api_key = app.config.get("API_KEY")
+
 
     # Core functions
     city_country = f"{city},{country}"
@@ -226,7 +219,6 @@ def weather():
     
     output_json = create_response_body(input_json)
     return jsonify(output_json)
-    #return output_json
 
 
 if __name__ == '__main__':

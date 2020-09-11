@@ -69,11 +69,12 @@ $ pip3 list
 $ python3 app.py
 ```
 
-2.7 Config Flask environment variables.
+2.7 Flask environment variables are configurated in this way.
 ```
-export FLASK_APP=app.py
-export FLASK_ENV=development
+FLASK_APP=app.py
+FLASK_ENV=development
 ```
+If you want to modified edit the `.flaskenv`.
 
 2.8 Deactivate the virtual env.
 ```

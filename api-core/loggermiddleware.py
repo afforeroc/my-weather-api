@@ -4,6 +4,6 @@ class LoggerMiddleware(object):
 
     def __call__(self, environ, start_response):
         print("----------------------")
-        print("Function called")
+        print("Debugger")
         print("----------------------")
         return self.app(environ, start_response)
