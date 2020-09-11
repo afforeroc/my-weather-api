@@ -11,9 +11,9 @@ This service is free and use data from OpenWeather API.
 ## Guideline
 
 ### 1. System configuration
-> Do it only once for configure the app
+> Only once for configure the app
 
-1.1 Check if Python3 is already installed in your Operative System.
+1.1 Check if Python3 is already installed in your computer.
 ```
 $ python3 --version
 ```
@@ -34,7 +34,7 @@ $ pip3 install python-dotenv
 ```
 
 ### 2. Python enviroment configuration
-> Do it only once for configure the app
+> Only once for configure the app
 
 2.1 Enter inside app folder.
 ```
@@ -81,7 +81,7 @@ deactivate
 ```
 
 ### 3. Dot enviroment configuration
-> Do it only once for configure the app
+> Only once for configure the app
 
 3.1 Enter inside app folder.
 ```
@@ -96,17 +96,12 @@ api_key='1234a5b6789c2357d111d31ef7192989'
 ```
 
 3.3 After that, save it and rename the file like this:
-> Before
 ```
-new.env
-```
-> After
-```
-.env
+[before] new.env -> [after] .new
 ```
 
 ### 4. Run the app
-> Do it every time when you run the app
+> Every time when you run the app
 
 4.1 Enter inside app folder.
 ```
@@ -124,7 +119,7 @@ $ flask run
 ```
 
 4.4 Make your API request.<br>
-Please see *5. Make the API request section*.
+Please see **5. Make the API request section**.
 
 4.5 Stop the app with <kbd>ctrl</kbd> + <kbd>C</kbd>.
 
@@ -134,21 +129,21 @@ $ deactivate
 ```
 
 ### 5. Make the API request
-> Do it every time when you run the app
+> Every time when you run the app
 
-5.1 Edit the following URL template and replace the `<...>` fields and put the required args.
+5.1 Edit the following URL template and replace the `<>` fields and put the required args.
 ```
 http://127.0.0.1:5000/weather?city=<>&country=<xx>
 ```
 e.g.<br>
-city=*Bogota* (Bogotá DC), country=*co* (Colombia).
+city=**Bogota** (Bogotá DC), country=**co** (Colombia).
 ```
 http://127.0.0.1:5000/weather?city=Bogota&country=co
 ```
 
 5.2 Remember:
-city: a string name without numbers or special characters.<br>
-country: a string with only two lower letters without numbers or special characters.
+* **city**: a string name without numbers or special characters.<br>
+* **country**: a string with only two lower letters without numbers or special characters.
 
 Please check the [List of ISO 3166 country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) for the available country codes that is possible to use.
 
@@ -174,6 +169,7 @@ e.g.
 
 ## Development - pending feactures
 Feactures completed and pending to construct.
+
 1. GET /weather?city=$City&country=$Country :heavy_check_mark:
 ```
 Response:  {
