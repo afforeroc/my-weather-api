@@ -2,7 +2,7 @@
 """My weather API using a flask framework."""
 
 import logging
-from flask import Flask, request, jsonify, json
+from flask import Flask, request, jsonify, json, abort
 import checkconfig
 import checkargs
 import webfunctions
@@ -44,7 +44,10 @@ def weather():
 
     # Processing core API
     place = webfunctions.get_place(city, country)
-    owmap_response = webfunctions.request_ow_api(api_url, api_key, place)
+    try:
+        owmap_response = webfunctions.request_ow_api(api_url, api_key, place)
+    except:
+        abort(500)
     input_json = json.loads(owmap_response)
     output_json = webfunctions.create_response_body(input_json)
     return jsonify(output_json)

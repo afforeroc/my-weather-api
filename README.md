@@ -202,7 +202,7 @@ Date: Fri, 11 Sep 2020 07:09:45 GMT
 ## Development: status of feactures
 Feactures completed and pending to construct.
 
-1. GET /weather?city=$City&country=$Country :heavy_check_mark:
+1. GET /weather?city=$City&country=$Country :heavy_check_mark: :heavy_check_mark:
 ```
 Response:  {
     "location_name": "Bogota, CO",
@@ -227,7 +227,7 @@ Response:  {
 
 6. Use environment variables for configuration :heavy_check_mark: :heavy_check_mark:
 
-7. Log errors to the terminal using a middleware :construction:
+7. Log errors to the terminal using a middleware :heavy_check_mark:
 
 8. The response must include the content-type header (application/JSON) :heavy_check_mark: :heavy_check_mark:
 
