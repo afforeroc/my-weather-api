@@ -5,29 +5,51 @@ import json
 import datetime
 import urllib.request
 import re
+import sys
 from dotenv import load_dotenv
-from flask import Flask, abort, request, jsonify
+from flask import Flask, abort, request, jsonify, Request
 from loggermiddleware import LoggerMiddleware
+
+class Middleware:
+    def __init__(self, app):
+        self.app = app
+
+    def __call__(self, environ, start_response):
+        # not Flask request - from werkzeug.wrappers import Request
+        request = Request(environ)
+        print('--> PATH: %s, URL: %s' % (request.path, request.url))
+        # just do here everything what you need
+        return self.app(environ, start_response)
 
 
 def check_file(pathfile):
     """Check if a pathfile exists and is not empty."""
     if not os.path.isfile(pathfile):
-        print(f"Oops! '{pathfile}' was not found")
-        abort(404)
+        print("----------------------")
+        print("INTERNAL ERROR")
+        print(f"Oops! '{pathfile}' file was not found")
+        print("----------------------")
+        abort(500)
+    elif os.stat(pathfile).st_size == 0:
+        print("----------------------")
+        print("INTERNAL ERROR")
+        print(f"Oops! '{pathfile}' file is empty")
+        print("----------------------")
+        abort(500)
+    else:
+        print(f"OK: '{pathfile}' file exits and is not empty")
 
-    if os.stat(pathfile).st_size == 0:
-        print(f"Oops! '{pathfile}' is empty")
-        abort(404)
-
-
-def check_args(*args):
-    """Check if the args are not None or empty."""
-    for i, arg in enumerate(args):
-        print(arg)
-        if arg is None or arg == '':
-            print(f"Oops! arg[{i}] is None or empty")
-            abort(400)
+    
+def check_empty(arg_name, arg):
+    """Check if a arg are not None or empty."""
+    if arg is None or arg == '':
+        print("----------------------")
+        print("INTERNAL ERROR")
+        print(f"Oops! {arg_name} is None or empty")
+        print("----------------------")
+        abort(400)
+    else:
+        print(f"OK: {arg_name} arg is not empty")
 
 
 def check_city(city):
@@ -36,11 +58,13 @@ def check_city(city):
     reg_expr = "[A-Za-z ]+" # String composed only by with letters
     pattern = re.compile(reg_expr)
     if pattern.fullmatch(city) is None:
-        print("Bad request by wrong syntax")
+        print("----------------------")
+        print("EXTERNAL ERROR: Bad request by wrong syntax")
         print(f"Oops! city => '{city_str}' not match with '{reg_expr}' regex expression")
+        print("----------------------")
         abort(400)
     else:
-        print(f"city => '{city_str}', city arg:\tOK")
+        print(f"OK: city (arg) => '{city_str}' match with '{reg_expr}' regex expression")
 
 
 def check_country(country):
@@ -50,12 +74,12 @@ def check_country(country):
     pattern = re.compile(reg_expr)
     if pattern.fullmatch(country_str) is None:
         print("----------------------")
-        print("BAD ARGUMENT")
+        print("EXTERNAL ERROR: Bad request by wrong syntax")
         print(f"Oops! country => '{country_str}' not match with '{reg_expr}' regex expression")
         print("----------------------")
         abort(400)
     else:
-        print(f"country => '{country_str}', country arg:\tOK")
+        print(f"OK: country (arg) => '{country_str}' match with '{reg_expr}' regex expression")
 
 
 def openweathermap_api(api_url, api_key, city_country):
@@ -182,24 +206,29 @@ def create_response_body(input_json):
     #output_json = json.dumps(json_response, indent=4, sort_keys=False)
     return output_json
 
-
 app = Flask(__name__)
+app.config['JSON_SORT_KEYS'] = False
+app.config['JSON_AS_ASCII'] = False
+app.wsgi_app = Middleware(app.wsgi_app)
 
 # /weather?city=$City&country=$Country
 @app.route('/weather', methods =['GET'])
 def weather():
     """Main function of Weather API."""
     
-    app.config.from_pyfile('settings.py')
-    app.wsgi_app = LoggerMiddleware(app.wsgi_app)
-    app.config['JSON_SORT_KEYS'] = False
-
-    # Initial validators
+    # Files validator
+    check_file('.flaskenv')
     check_file('.env')
+    check_file('settings.py')
+
+    #
+    
 
     # Check main args: city and country
     city  = request.args.get('city', None)
     country  = request.args.get('country', None)
+    check_empty('city', city)
+    check_empty('country', country)
     check_city(city)
     check_country(country)
 

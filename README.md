@@ -168,6 +168,37 @@ e.g.
 }
 ```
 
+5.4 Check by console.<br>
+e.g.
+```
+**user@user**:~$ curl "http://127.0.0.1:5000/weather?city=bogota&country=co"
+{
+  "location_name": "Bogotá, CO", 
+  "temperature": "12 °C", 
+  "wind": "0.21 m/s, 115 deg", 
+  "cloudines": "Broken clouds", 
+  "pressure": "1027 hPa", 
+  "humidity": "93%", 
+  "sunrise": "05:48", 
+  "sunset": "17:57", 
+  "geo_coordinates": [
+    "4.61", 
+    "-74.08"
+  ], 
+  "requested_time": "2020-09-11 02:23:33"
+}
+```
+
+e.g.
+```
+**user@user**:~$ curl -s -I "http://127.0.0.1:5000/weather?city=bogota&country=co"
+HTTP/1.0 200 OK
+Content-Type: application/json
+Content-Length: 330
+Server: Werkzeug/1.0.1 Python/3.8.2
+Date: Fri, 11 Sep 2020 07:09:45 GMT
+```
+
 ## Development: status of feactures
 Feactures completed and pending to construct.
 
@@ -190,16 +221,15 @@ Response:  {
 
 3. Country is a country code of two characters in lowercase. Example: co :heavy_check_mark: :heavy_check_mark:
 
-4. This endpoint should use an external API to get the proper info, here is an example: http://api.openweathermap.org/data/2.5/weather?q=Bogota,co&appid=1508a9a4840a5574c822d70ca2132032 :heavy_check_mark:
+4. This endpoint should use an external API to get the proper info, here is an example: http://api.openweathermap.org/data/2.5/weather?q=Bogota,co&appid=1508a9a4840a5574c822d70ca2132032 :heavy_check_mark: :heavy_check_mark:
 
-5. The data must be human-readable :heavy_check_mark:
+5. The data must be human-readable :heavy_check_mark: :heavy_check_mark:
 
-6. Use environment variables for configuration :heavy_check_mark: 
+6. Use environment variables for configuration :heavy_check_mark: :heavy_check_mark:
 
 7. Log errors to the terminal using a middleware :construction:
 
-8. The response must include the content-type header (application/JSON) :heavy_check_mark:
-* Check via console :construction:
+8. The response must include the content-type header (application/JSON) :heavy_check_mark: :heavy_check_mark:
 
 9. Functions must be tested :construction:
 
@@ -229,4 +259,6 @@ Response:  {
 * [Stack Overflow - How to check that a string contains only “a-z”, “A-Z” and “0-9” characters](https://stackoverflow.com/questions/57011986/how-to-check-that-a-string-contains-only-a-z-a-z-and-0-9-characters)
 * [Stack Overflow - Regex to check if first 2 characters in a string are Alphabets](https://stackoverflow.com/questions/6311030/regex-to-check-if-first-2-characters-in-a-string-are-alphabets/6311081)
 * [Stack Overflow - Forcing application/json MIME type in a view (Flask)](https://stackoverflow.com/questions/11945523/forcing-application-json-mime-type-in-a-view-flask)
+* [Stack Overflow - Curl show Content-Type only](https://stackoverflow.com/questions/23675967/curl-show-content-type-only/23676198)
+* [Stack Overflow - python jsonify dictionary in utf-8](https://stackoverflow.com/questions/14853694/python-jsonify-dictionary-in-utf-8)
 -->
