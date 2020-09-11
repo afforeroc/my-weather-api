@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Create a Weather API using a framework if you like."""
+"""My weather API using a flask framework."""
 import os
 import json
 import datetime
@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 from flask import Flask, abort, request, jsonify, Response
 import loggermiddleware
 from loggermiddleware import LoggerMiddleware
+
 
 def load_env_owmap(env_file):
     """Load auth settings for OpenWeatherMap."""
