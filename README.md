@@ -110,7 +110,7 @@ $ source env/bin/activate
 4.3 Run the app with Flask environment variables. 
 ```
 $ flask run
-``
+```
 
 4.4 Make your API request. Please see **5. Make the request to the Web API** section of this.
 
@@ -129,7 +129,7 @@ $ deactivate
 http://127.0.0.1:5000/weather?city=<city>&country=<xx>
 ```
 
-Edit like this: city=Bogota (Bogotá DC), country=co (Colombia). 
+Edit like this: city=Bogota (Bogotá DC), country=co (Colombia).<br>
 e.g.
 ```
 http://127.0.0.1:5000/weather?city=Bogota&country=co
@@ -197,7 +197,7 @@ Response:  {
 
 10. Keep a cache of 2 minutes of the data. You can use a persistent layer for this.
 
-
+<!--
 ## Reference links
 * [The Hitchhiker’s Guide to Python - Installing Python 3 on Linux](https://docs.python-guide.org/starting/install3/linux/)
 * [Pythonise - Your first Flask app | Learning Flask Ep. 1](https://pythonise.com/series/learning-flask/your-first-flask-app)
@@ -212,7 +212,7 @@ Response:  {
 * [Stack Overflow - How to check that a string contains only “a-z”, “A-Z” and “0-9” characters](https://stackoverflow.com/questions/57011986/how-to-check-that-a-string-contains-only-a-z-a-z-and-0-9-characters)
 * [Stack Overflow - Regex to check if first 2 characters in a string are Alphabets](https://stackoverflow.com/questions/6311030/regex-to-check-if-first-2-characters-in-a-string-are-alphabets/6311081)
 * [Stack Overflow - Forcing application/json MIME type in a view (Flask)](https://stackoverflow.com/questions/11945523/forcing-application-json-mime-type-in-a-view-flask)
-
+-->
 
 ## Information links
 * [Flask Documentation](http://flask.pocoo.org/)
