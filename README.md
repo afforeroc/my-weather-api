@@ -1,19 +1,19 @@
 # My Weather API
-This is my weather API that provides current information of a city's weather that you want.
+This is my weather API that provides current information of a city's weather that you want.<br>
 This service is free and use data from OpenWeather API.
 
 ## Prerequisites
 * Ubuntu 20.04 LTS
-* Python3 v3.8.2
-* Pip3 v20.2.3
-* Flask v1.1.2
+* Python 3.8.2
+* Pip3 20.2.3
+* Flask 1.1.2
 
 ## Guideline
 
 ### 1. System configuration
-> Only once for configure the app
+> Only once before you run the app
 
-1.1 Check if Python3 is already installed in your computer.
+1.1 Check if Python is already installed in your computer.
 ```
 $ python3 --version
 ```
@@ -21,7 +21,7 @@ $ python3 --version
 $ pip3 --version
 ```
 
-1.2 If Python3 isn't installed, please check this [article](https://docs.python-guide.org/starting/install3/linux/).
+1.2 If Python isn't installed, please check this [article](https://docs.python-guide.org/starting/install3/linux/).
 
 1.3 Install Python Virtual Environment, a manager of enviroment for Python packages.
 ```
@@ -34,7 +34,7 @@ $ pip3 install python-dotenv
 ```
 
 ### 2. Python enviroment configuration
-> Only once for configure the app
+> Only once before you run the app
 
 2.1 Enter inside app folder.
 ```
@@ -81,7 +81,7 @@ deactivate
 ```
 
 ### 3. Dot enviroment configuration
-> Only once for configure the app
+> Only once before you run the app
 
 3.1 Enter inside app folder.
 ```
