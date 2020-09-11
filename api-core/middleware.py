@@ -1,6 +1,11 @@
+# -*- coding: utf-8 -*-
+"""Required middleware to monitoring logs and errors."""
+
 from flask import Request
 
+
 class Middleware:
+    """Middleware class that prints the path and the URL request."""
     def __init__(self, app):
         self.app = app
 
