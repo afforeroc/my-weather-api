@@ -261,4 +261,5 @@ Response:  {
 * [Stack Overflow - Forcing application/json MIME type in a view (Flask)](https://stackoverflow.com/questions/11945523/forcing-application-json-mime-type-in-a-view-flask)
 * [Stack Overflow - Curl show Content-Type only](https://stackoverflow.com/questions/23675967/curl-show-content-type-only/23676198)
 * [Stack Overflow - python jsonify dictionary in utf-8](https://stackoverflow.com/questions/14853694/python-jsonify-dictionary-in-utf-8)
+* [parisnakitakejser/video-tutorial-python-code](https://github.com/parisnakitakejser/video-tutorial-python-code/tree/master/Flask)
 -->

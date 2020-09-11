@@ -1,28 +1,26 @@
 # -*- coding: utf-8 -*-
 """My weather API using a flask framework."""
 
-from flask import Flask, request, jsonify, logging, json
+from flask import Flask, request, jsonify, logging, json, Response
 import checkconfig
 import checkargs
 import webfunctions
-from middleware import Middleware
+#from middleware import Middleware
+import logging
 
+logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__)
+app.config.from_pyfile('settings.py')
 app.config['JSON_SORT_KEYS'] = False
 app.config['JSON_AS_ASCII'] = False
-app.config.from_pyfile('settings.py')
-app.wsgi_app = Middleware(app.wsgi_app)
-
-
-@app.route('/logs')
-def principal():
-    return 'Ejemplo para logs'
+#app.wsgi_app = Middleware(app.wsgi_app)
 
 
 # /weather?city=$City&country=$Country
 @app.route('/weather', methods=['GET'])
 def weather():
     """Main function of Weather API."""
+    app.logger.debug('Hello world - app.logger.info')
 
     # Load enviroment variables of OpenWeather API
     api_url = app.config.get("API_URL")
