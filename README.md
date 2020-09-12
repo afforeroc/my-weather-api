@@ -267,4 +267,6 @@ Response:  {
 * [Stack Overflow - Curl show Content-Type only](https://stackoverflow.com/questions/23675967/curl-show-content-type-only/23676198)
 * [Stack Overflow - python jsonify dictionary in utf-8](https://stackoverflow.com/questions/14853694/python-jsonify-dictionary-in-utf-8)
 * [parisnakitakejser/video-tutorial-python-code](https://github.com/parisnakitakejser/video-tutorial-python-code/tree/master/Flask)
+* [Pretty Printed - Intro to Flask-Caching](https://www.youtube.com/watch?v=iO0sL6Vyfps)
+* [Stack Overflow - What is the easiest way to get current GMT time in Unix timestamp format?](https://stackoverflow.com/questions/16755394/what-is-the-easiest-way-to-get-current-gmt-time-in-unix-timestamp-format)
 -->

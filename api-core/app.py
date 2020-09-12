@@ -10,7 +10,6 @@ import checkargs
 import webfunctions
 #from middleware import Middleware
 
-
 logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__)
 app.config.from_pyfile('settings.py')
@@ -20,6 +19,14 @@ cache = Cache()
 app.config['CACHE_TYPE'] = 'simple'
 cache.init_app(app)
 #app.wsgi_app = Middleware(app.wsgi_app)
+
+@app.before_first_request
+def before_first_request_func():
+    # Files validation
+    checkconfig.check_file('.flaskenv')
+    checkconfig.check_file('.env')
+    checkconfig.check_file('settings.py')
+    print("This function will run once ")
 
 
 # /weather?city=$City&country=$Country
@@ -32,11 +39,6 @@ def weather():
     # Load enviroment variables of OpenWeather API
     api_url = app.config.get("API_URL")
     api_key = app.config.get("API_KEY")
-
-    # Files validation
-    checkconfig.check_file('.flaskenv')
-    checkconfig.check_file('.env')
-    checkconfig.check_file('settings.py')
 
     # Capture of city and country args
     city = request.args.get('city', None)
