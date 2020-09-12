@@ -5,8 +5,7 @@ import logging
 from datetime import datetime
 from flask import Flask, request, jsonify, json, abort
 from flask_caching import Cache
-from checkconfig import check_file
-import checkargs
+from validators import check_emptiness, check_regex
 import webfunctions
 import os
 #from middleware import Middleware
@@ -19,42 +18,26 @@ app.config['JSON_AS_ASCII'] = False
 cache = Cache()
 app.config['CACHE_TYPE'] = 'simple'
 cache.init_app(app)
-#app.wsgi_app = Middleware(app.wsgi_app)
 
-@app.before_first_request
-def before_first_request_func():
-    # Files validation
-    if not check_file('.flaskenv'):
-        logging.debug("'.flaskenv' doesn't exist or it is empty")
-        abort(500)
-    else:
-         logging.debug("'.flaskenv' exists and it isn't empty: OK")
-    
-    if not check_file('.env'):
-        logging.debug("'.env' doesn't exist or it is empty")
-        abort(500)
-    else:
-        logging.debug("'.env' exists and it isn't empty: OK")
-
-# /weather?city=$City&country=$Country
+#/weather?city=$City&country=$Country
 @app.route('/weather', methods=['GET'])
 @cache.cached(timeout=120)
 def weather():
     """Main function of Weather API."""
 
-    # Load enviroment variables of OpenWeather API
+    # Load URL and KEY of OpenWeather API
     api_url = app.config.get("API_URL")
     api_key = app.config.get("API_KEY")
+    check_emptiness('API_URL', api_url)
+    check_emptiness('API_KEY', api_key)
 
     # Capture of city and country args
     city = request.args.get('city', None)
     country = request.args.get('country', None)
-
-    # Input args and their check section
-    checkargs.check_empty('city', city)
-    checkargs.check_empty('country', country)
-    checkargs.check_arg('city', city, "[A-Za-z ]+", "string")
-    checkargs.check_arg('country', country, "[a-z]{2}", "lower two letters")
+    check_emptiness('city', city)
+    check_emptiness('country', country)
+    check_regex('city', city, "[A-Za-z ]+")
+    check_regex('country', country, "[a-z]{2}")
 
     # Processing core API
     place = webfunctions.get_place(city, country)
