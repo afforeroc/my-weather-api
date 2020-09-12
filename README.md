@@ -64,19 +64,24 @@ $ pip3 install flask
 $ pip3 list
 ```
 
-2.6 Check the first app running.
+2.6 Install some Flask dependencies.
+```
+$ pip3 install flask-caching
+```
+
+2.7 Check the first app running.
 ```
 $ python3 app.py
 ```
 
-2.7 Flask environment variables are configurated in this way.
+2.8 Flask environment variables are configurated in this way.
 ```
 FLASK_APP=app.py
 FLASK_ENV=development
 ```
 If you want to modified edit the `.flaskenv`.
 
-2.8 Deactivate the virtual env.
+2.9 Deactivate the virtual env.
 ```
 deactivate
 ```

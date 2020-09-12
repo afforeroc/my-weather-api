@@ -3,8 +3,14 @@
 
 import datetime
 import json
+from random import randint
 import urllib.request
 
+
+def get_random_num():
+    rand_num = randint(1, 100)
+    output_json = { "number": rand_num}
+    return output_json
 
 def get_place(city, country):
     """Join city and country args."""
