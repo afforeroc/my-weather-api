@@ -3,15 +3,13 @@
 
 import os
 from flask import abort
+import logging
 
+logging.basicConfig(level=logging.DEBUG)
 
 def check_file(pathfile):
     """Check if a pathfile exists and is not empty."""
-    if not os.path.isfile(pathfile):
-        print(f">> INTERNAL ERROR! '{pathfile}' file was not found")
-        abort(500)
-    elif os.stat(pathfile).st_size == 0:
-        print(f">> INTERNAL ERROR! '{pathfile}' file is empty")
-        abort(500)
+    if not os.path.isfile(pathfile) or os.stat(pathfile).st_size == 0:
+        return 0
     else:
-        print(f"OK: '{pathfile}' file exits and is not empty")
+        return 1

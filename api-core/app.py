@@ -5,9 +5,10 @@ import logging
 from datetime import datetime
 from flask import Flask, request, jsonify, json, abort
 from flask_caching import Cache
-import checkconfig
+from checkconfig import check_file
 import checkargs
 import webfunctions
+import os
 #from middleware import Middleware
 
 logging.basicConfig(level=logging.DEBUG)
@@ -23,18 +24,23 @@ cache.init_app(app)
 @app.before_first_request
 def before_first_request_func():
     # Files validation
-    checkconfig.check_file('.flaskenv')
-    checkconfig.check_file('.env')
-    checkconfig.check_file('settings.py')
-    print("This function will run once ")
-
+    if not check_file('.flaskenv'):
+        logging.debug("'.flaskenv' doesn't exist or it is empty")
+        abort(500)
+    else:
+         logging.debug("'.flaskenv' exists and it isn't empty: OK")
+    
+    if not check_file('.env'):
+        logging.debug("'.env' doesn't exist or it is empty")
+        abort(500)
+    else:
+        logging.debug("'.env' exists and it isn't empty: OK")
 
 # /weather?city=$City&country=$Country
 @app.route('/weather', methods=['GET'])
 @cache.cached(timeout=120)
 def weather():
     """Main function of Weather API."""
-    logging.debug('Hello world - app.logger.info')
 
     # Load enviroment variables of OpenWeather API
     api_url = app.config.get("API_URL")
