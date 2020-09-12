@@ -8,13 +8,13 @@ import json
 from random import randint
 import urllib.request
 
-# Old function that obtain and convert the unix datetime from OpenWeather API
-def get_requested_time(input_json, arg1):
-    """Return full date time of call request."""
-    requested_ut = int(input_json[arg1])
-    requested_ts = datetime.fromtimestamp(requested_ut)
-    requested_time = requested_ts.strftime('%Y-%m-%d %H:%M:%S')
-    return requested_time
+
+def get_place(city, country):
+    """Join city and country args."""
+    city = str(city).replace(' ', '%20')
+    country = str(country)
+    return f"{city},{country}"
+
 
 def get_now_datetime_unix():
     """Return current datetime from the current unix timestamp.""" 
@@ -25,21 +25,14 @@ def get_now_datetime_unix():
     return now_datetime
 
 
-def get_place(city, country):
-    """Join city and country args."""
-    city = str(city).replace(' ', '%20')
-    country = str(country)
-    return f"{city},{country}"
-
-
 def request_ow_api(api_url, api_key, city_country):
     """Request weather data from OpenWeather API."""
-    request_api = str(api_url) + str(
-        city_country) + '&units=metric&appid=' + str(api_key)
+    metric_req = '&units=metric&appid='
+    request_api = str(api_url) + str(city_country) + metric_req + str(api_key)
     json_data = urllib.request.urlopen(request_api).read()
     return json_data
 
-
+# Debug function to see data_json in console.
 def beautiful_json(data_json):
     """Print in console a JSON data in beautiful style."""
     json_data = json.dumps(data_json,
