@@ -204,7 +204,7 @@ Server: Werkzeug/1.0.1 Python/3.8.2
 Date: Fri, 11 Sep 2020 07:09:45 GMT
 ```
 
-## Development: status of feactures
+## Development: features status
 Feactures completed and pending to construct.
 
 1. GET /weather?city=$City&country=$Country :heavy_check_mark: :heavy_check_mark:
@@ -238,7 +238,7 @@ Response:  {
 
 9. Functions must be tested :construction:
 
-10. Keep a cache of 2 minutes of the data. You can use a persistent layer for this.
+10. Keep a cache of 2 minutes of the data. You can use a persistent layer for this. :heavy_check_mark: :heavy_check_mark:
 
 
 ## Reference links
