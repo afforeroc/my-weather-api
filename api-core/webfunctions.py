@@ -1,16 +1,29 @@
 # -*- coding: utf-8 -*-
 """Functions to manipulate JSON objects of My weather API."""
 
-import datetime
+from datetime import datetime
+import calendar
+import time
 import json
 from random import randint
 import urllib.request
 
+# Old function that obtain and convert the unix datetime from OpenWeather API
+def get_requested_time(input_json, arg1):
+    """Return full date time of call request."""
+    requested_ut = int(input_json[arg1])
+    requested_ts = datetime.fromtimestamp(requested_ut)
+    requested_time = requested_ts.strftime('%Y-%m-%d %H:%M:%S')
+    return requested_time
 
-def get_random_num():
-    rand_num = randint(1, 100)
-    output_json = { "number": rand_num}
-    return output_json
+def get_now_datetime_unix():
+    """Return current datetime from the current unix timestamp.""" 
+    now_datetime_utc = datetime.utcnow()
+    now_datetime_ut = calendar.timegm(now_datetime_utc.utctimetuple())
+    now_datetime_ts = datetime.fromtimestamp(now_datetime_ut)
+    now_datetime = now_datetime_ts.strftime('%Y-%m-%d %H:%M:%S')
+    return now_datetime
+
 
 def get_place(city, country):
     """Join city and country args."""
@@ -60,16 +73,8 @@ def get_cloudines(input_json):
 def get_hour_time(input_json, arg1, arg2):
     """Return a specific HH:MM from a unix time provided."""
     datetime_unix = int(input_json[arg1][arg2])
-    datetime_ts = datetime.datetime.fromtimestamp(datetime_unix)
+    datetime_ts = datetime.fromtimestamp(datetime_unix)
     return datetime_ts.strftime('%H:%M')
-
-
-def get_requested_time(input_json, arg1):
-    """Return full date time of call request."""
-    requested_ut = int(input_json[arg1])
-    requested_ts = datetime.datetime.fromtimestamp(requested_ut)
-    requested_time = requested_ts.strftime('%Y-%m-%d %H:%M:%S')
-    return requested_time
 
 
 def create_response_body(input_json):
@@ -86,7 +91,8 @@ def create_response_body(input_json):
     coord_lat = str(input_json['coord']['lat'])
     sunrise_hour = get_hour_time(input_json, 'sys', 'sunrise')
     sunset_hour = get_hour_time(input_json, 'sys', 'sunset')
-    requested_time = get_requested_time(input_json, 'dt')
+    #requested_time = get_requested_time(input_json, 'dt')
+    requested_time = get_now_datetime_unix()
 
     output_json = {
         "location_name": f"{city_name}, {country_code}",
