@@ -3,7 +3,6 @@
 
 import re
 import logging
-import os
 from flask import abort
 
 
