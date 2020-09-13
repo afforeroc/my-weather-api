@@ -56,19 +56,12 @@ $ pip3 --version
 $ pip3 install flask flask-caching python-dotenv
 ```
 
-2.7 Check the first app running.
+2.7 Test in console that flask app is only running.
 ```
-$ python3 app.py
+$ flask run
 ```
 
-2.8 Flask environment variables are configurated in this way.
-```
-FLASK_APP=app.py
-FLASK_ENV=development
-```
-If you want to modified edit the `.flaskenv`.
-
-2.9 Deactivate the virtual env.
+2.8 Deactivate the virtual env.
 ```
 deactivate
 ```
@@ -81,8 +74,7 @@ deactivate
 $ cd my-weather-api/api-core/
 ```
 
-3.2 Edit the `new.env` file and put the requerired URL and key for the OpenWeather API of [Current Weather Data](https://openweathermap.org/current).<br>
-e.g.
+3.2 Edit the `new.env` file and put the requerired URL and key for the OpenWeather API of [Current Weather Data](https://openweathermap.org/current). e.g.<br>
 ```
 api_url='http://api.openweathermap.org/data/2.5/weather?q='
 api_key='1234a5b6789c2357d111d31ef7192989'
@@ -92,6 +84,8 @@ api_key='1234a5b6789c2357d111d31ef7192989'
 ```
 [before] new.env -> [after] .new
 ```
+
+3.4 If you want to modified the flask env, only modify `.flaskenv` file.
 
 ### 4. Run the app
 > Every time when you run the app
@@ -128,8 +122,8 @@ $ deactivate
 ```
 http://127.0.0.1:5000/weather?city=<>&country=<xx>
 ```
->e.g.<br>
-city=**Bogota** (Bogotá DC), country=**co** (Colombia).
+
+e.g. city=**Bogota** (Bogotá DC), country=**co** (Colombia).
 ```
 http://127.0.0.1:5000/weather?city=Bogota&country=co
 ```
