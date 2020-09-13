@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
-"""Functions to manipulate JSON objects and and date time of My weather API."""
+"""Functions to manipulate JSON and datetime objects for My Weather API."""
 
 from datetime import datetime
-import sys
 import calendar
 import json
 import urllib.request
-import logging
 from flask import make_response, jsonify, abort
 
 
@@ -18,19 +16,19 @@ def get_place(city, country):
 
 
 def request_ow_api(api_url, api_key, city_country):
-    """Request weather data from OpenWeather API."""
+    """Request weather data from OpenWeatherMap API."""
     metric_req = '&units=metric&appid='
     request_api = str(api_url) + str(city_country) + metric_req + str(api_key)
     try:
         response = urllib.request.urlopen(request_api).read()
         resp_json = json.loads(response)
-    except urllib.error.HTTPError as e:
-        resp_json = json.loads(e.read())
-        logging.error(json.loads(e.read()))
-    finally:
-        return resp_json
+    except urllib.error.HTTPError as exception:
+        resp_json = json.loads(exception.read())
+    return resp_json
+
 
 def reply_bad_response(input_json):
+    """ The bad response will be same that it was obtained from OpenWeatherMap."""
     if str(input_json['cod']) != '200':
         code = int(input_json['cod'])
         message = str(input_json['message'])

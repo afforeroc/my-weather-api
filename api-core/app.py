@@ -24,7 +24,7 @@ cache.init_app(app)
 
 #/weather?city=$City&country=$Country => API URL format to make the request
 @app.route('/weather', methods=['GET'])
-@cache.cached(120)  # 2 minutes of cache. Doesn't captured the args changes :(
+#@cache.cached(120)  # 2 minutes of cache. Doesn't captured the args changes :(
 def weather():
     """The weather route of My Weather API."""
     # Load URL and KEY args of Current Weather API of OpenWeatherMap
