@@ -2,13 +2,11 @@
 """My weather API using a flask framework."""
 
 import logging
-from datetime import datetime
-from flask import Flask, request, jsonify, json, abort
+from flask import Flask, request, jsonify, json, abort, Response
 from flask_caching import Cache
-from validators import check_emptiness, check_regex
-import webfunctions
-import os
-#from middleware import Middleware
+import validators  # Functions to check variables and route args.
+import webfunctions  # Functions to manipulate JSON and date time.
+
 
 logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__)
@@ -20,19 +18,6 @@ app.config['CACHE_TYPE'] = 'simple'
 cache.init_app(app)
 
 
-def check_city_country(city_prev, city, country_prev, country):
-    print(city_prev)
-    print(city)
-    print(country_prev)
-    print(country)
-    """
-    if city_prev != city or country_prev != country:
-        city_prev = city
-        country_prev = country_prev
-        with app.app_context():
-            cache.init_app(app)
-    """
-
 #/weather?city=$City&country=$Country
 @app.route('/weather', methods=['GET'])
 #@cache.cached(120)
@@ -41,33 +26,29 @@ def weather():
     # Load URL and KEY of OpenWeather API
     api_url = app.config.get("API_URL")
     api_key = app.config.get("API_KEY")
-    check_emptiness('API_URL', api_url)
-    check_emptiness('API_KEY', api_key)
-    
+    validators.check_emptiness('API_URL', api_url)
+    validators.check_emptiness('API_KEY', api_key)
+
+    # Obtain and verify the city and country args
     city = request.args.get('city', None)
     country = request.args.get('country', None)
-
-    check_emptiness('city', city)
-    check_emptiness('country', country)
-    check_regex('city', city, "[A-Za-z ]+")
-    check_regex('country', country, "[a-z]{2}")
+    validators.check_emptiness('city', city)
+    validators.check_emptiness('country', country)
+    validators.check_regex('city', city, "[A-Za-z ]+")
+    validators.check_regex('country', country, "[a-z]{2}")
 
     # Processing core API
     place = webfunctions.get_place(city, country)
-
-
-    cache_status = webfunctions.refresh_cache('.cache', city, country)
-    try:
-        if cache_status:
-            owmap_response = webfunctions.request_ow_api(api_url, api_key, place)
-    except:
-        print("error")
-    
-    
-    input_json = json.loads(owmap_response)
-    #webfunctions.beautiful_json(input_json)
-    output_json = webfunctions.create_response_body(input_json)
-    return jsonify(output_json)
+    input_json = webfunctions.request_ow_api(api_url, api_key, place)
+    print(">>>>>>>>>>>>", input_json['cod'], type(input_json['cod']))
+    if str(input_json['cod']) != '200':
+        code = int(input_json['cod'])
+        message = str(input_json['message'])
+        abort(Response(message, code))
+    else:
+        webfunctions.beautiful_json(input_json)
+        output_json = webfunctions.create_response_body(input_json)
+        return jsonify(output_json)
 
 
 if __name__ == '__main__':

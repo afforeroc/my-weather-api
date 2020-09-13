@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
-"""Functions to manipulate JSON objects of My weather API."""
+"""Functions to manipulate JSON objects and and date time of My weather API."""
 
 from datetime import datetime
+import sys
 import calendar
 import json
 import urllib.request
+import logging
 
 
 def get_place(city, country):
@@ -18,8 +20,14 @@ def request_ow_api(api_url, api_key, city_country):
     """Request weather data from OpenWeather API."""
     metric_req = '&units=metric&appid='
     request_api = str(api_url) + str(city_country) + metric_req + str(api_key)
-    json_data = urllib.request.urlopen(request_api).read()
-    return json_data
+    try:
+        response = urllib.request.urlopen(request_api).read()
+        resp_json = json.loads(response)
+    except urllib.error.HTTPError as e:
+        resp_json = json.loads(e.read())
+        logging.error(json.loads(e.read()))
+    finally:
+        return resp_json
 
 
 def get_now_datetime_unix():
