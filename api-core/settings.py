@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Load API settings of OpenWeather API."""
+"""Load API settings of Current Weather API of OpenWeatherMap."""
 
 from os import environ
 

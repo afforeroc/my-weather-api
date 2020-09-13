@@ -7,6 +7,7 @@ import calendar
 import json
 import urllib.request
 import logging
+from flask import make_response, jsonify, abort
 
 
 def get_place(city, country):
@@ -28,6 +29,13 @@ def request_ow_api(api_url, api_key, city_country):
         logging.error(json.loads(e.read()))
     finally:
         return resp_json
+
+def reply_bad_response(input_json):
+    if str(input_json['cod']) != '200':
+        code = int(input_json['cod'])
+        message = str(input_json['message'])
+        bad_response = make_response(jsonify(message=message), code)
+        abort(bad_response)
 
 
 def get_now_datetime_unix():
