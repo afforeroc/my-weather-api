@@ -3,9 +3,7 @@
 
 from datetime import datetime
 import calendar
-import time
 import json
-from random import randint
 import urllib.request
 
 
@@ -16,21 +14,22 @@ def get_place(city, country):
     return f"{city},{country}"
 
 
-def get_now_datetime_unix():
-    """Return current datetime from the current unix timestamp.""" 
-    now_datetime_utc = datetime.utcnow()
-    now_datetime_ut = calendar.timegm(now_datetime_utc.utctimetuple())
-    now_datetime_ts = datetime.fromtimestamp(now_datetime_ut)
-    now_datetime = now_datetime_ts.strftime('%Y-%m-%d %H:%M:%S')
-    return now_datetime
-
-
 def request_ow_api(api_url, api_key, city_country):
     """Request weather data from OpenWeather API."""
     metric_req = '&units=metric&appid='
     request_api = str(api_url) + str(city_country) + metric_req + str(api_key)
     json_data = urllib.request.urlopen(request_api).read()
     return json_data
+
+
+def get_now_datetime_unix():
+    """Return current datetime from the current unix timestamp."""
+    now_datetime_utc = datetime.utcnow()
+    now_datetime_ut = calendar.timegm(now_datetime_utc.utctimetuple())
+    now_datetime_ts = datetime.fromtimestamp(now_datetime_ut)
+    now_datetime = now_datetime_ts.strftime('%Y-%m-%d %H:%M:%S')
+    return now_datetime
+
 
 # Debug function to see data_json in console.
 def beautiful_json(data_json):

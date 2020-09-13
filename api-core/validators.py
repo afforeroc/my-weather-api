@@ -3,28 +3,32 @@
 
 import re
 import logging
+import os
 from flask import abort
 
-def check_emptiness(var_name, var_val, reg_expr=None):
+
+def check_emptiness(var_name, var_val):
     """Verify if a variable is None/empty."""
     if var_val is None:
-        logging.error(f" {var_name} is '{var_val}'.")
+        error_message = f" {var_name} is '{var_val}'."
+        logging.error(error_message)
         abort(500)
     if var_val == '':
-        logging.error(f" {var_name} is '{var_val}' (empty).")
+        error_message = f" {var_name} is '{var_val}' (empty)."
+        logging.error(error_message)
         abort(500)
-    logging.debug(f" {var_name}='{var_val}' was loaded: OK")
+    sucess_message = f" {var_name}='{var_val}' was loaded: OK"
+    logging.debug(sucess_message)
 
 
-def check_regex(arg_name, arg, reg_expr):
-    """Verify if an arg matches with a specific regex."""
-    arg_str = str(arg)
+def check_regex(var_name, var, reg_expr):
+    """Verify if an var matches with a specific regex."""
+    var_str = str(var)
     pattern = re.compile(reg_expr)
-    if pattern.fullmatch(arg_str) is None:
-        logging.error(f" {arg_name}:'{arg_str}' doesn't match with '{reg_expr}' regex")
+    if pattern.fullmatch(var_str) is None:
+        error_message = f" {var_name}:'{var_str}' doesn't match with '{reg_expr}' regex"
+        logging.error(error_message)
         abort(400)
     else:
-        logging.debug(f" {arg_name}:'{arg_str}' matchs with '{reg_expr}' regex: OK")
-
-
-
+        sucess_message = f" {var_name}='{var}' matches with '{reg_expr}' regex: OK"
+        logging.debug(sucess_message)
