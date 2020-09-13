@@ -1,24 +1,19 @@
 # My Weather API
-This is my weather API that provides current information of a city's weather that you want.<br>
-This service is free and use data from OpenWeather API.
+This is My Weather API that provides current information of a city's weather that you want.<br>
+This service is free and use data from Current Weather API of OpenWeatherMap.
 
 ## Prerequisites
 * Ubuntu 20.04 LTS
 * Python 3.8.2
-* Pip3 20.2.3
-* Flask 1.1.2
 
 ## Guideline
 
-### 1. System configuration
+### 1. Basic system configuration
 > Only once before you run the app
 
-1.1 Check if Python is already installed in your computer.
+1.1 Check if Python and Pip is already installed in your computer.
 ```
 $ python3 --version
-```
-```
-$ pip3 --version
 ```
 
 1.2 If Python isn't installed, please check this [article](https://docs.python-guide.org/starting/install3/linux/).
@@ -28,17 +23,12 @@ $ pip3 --version
 $ sudo apt-get install python3-venv
 ```
 
-1.4 Install 'dotenv' library, a manager of environment variables for API keys, API URLs, config settings, etc.
-```
-$ pip3 install python-dotenv
-```
-
 ### 2. Python enviroment configuration
 > Only once before you run the app
 
 2.1 Enter inside app folder.
 ```
-$ cd api-core/
+$ cd my-weather-api/api-core/
 ```
 
 2.2 Create a Python virtual environment.
@@ -51,22 +41,19 @@ $ python3 -m venv env
 $ source env/bin/activate
 ```
 
-2.4 Updating pip3 for the virtual env.
+2.4 Updating Pip for the virtual env.
 ```
 $ pip3 install --upgrade pip
 ```
 
-2.5 Installing Flask and check the associated packages.
+2.5 Check Pip version of your virtual env.
 ```
-$ pip3 install flask
-```
-```
-$ pip3 list
+$ pip3 --version
 ```
 
-2.6 Install some Flask dependencies.
+2.6 Install the required packages: `flask`, `dotenv` and `flask-caching`.
 ```
-$ pip3 install flask-caching
+$ pip3 install flask flask-caching python-dotenv
 ```
 
 2.7 Check the first app running.
@@ -91,7 +78,7 @@ deactivate
 
 3.1 Enter inside app folder.
 ```
-$ cd api-core/
+$ cd my-weather-api/api-core/
 ```
 
 3.2 Edit the `new.env` file and put the requerired URL and key for the OpenWeather API of [Current Weather Data](https://openweathermap.org/current).<br>
@@ -111,7 +98,7 @@ api_key='1234a5b6789c2357d111d31ef7192989'
 
 4.1 Enter inside app folder.
 ```
-$ cd api-core/
+$ cd my-weather-api/api-core/
 ```
 
 4.2 Activate the environment.
@@ -153,8 +140,7 @@ http://127.0.0.1:5000/weather?city=Bogota&country=co
 
 Please check the [List of ISO 3166 country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) for the available country codes that is possible to use.
 
-5.3 After that, put the URL on your favorite web browser and check the response on JSON format.<br>
->e.g.
+5.3 After that, put the URL on your favorite web browser and check the response on JSON format. e.g.<br>
 ```
 {
   "location_name": "Bogotá, CO",
@@ -173,8 +159,7 @@ Please check the [List of ISO 3166 country codes](https://en.wikipedia.org/wiki/
 }
 ```
 
-5.4 Check by console.<br>
->e.g.
+5.4 Check by console. e.g.<br>
 ```
 user@user:~$ curl "http://127.0.0.1:5000/weather?city=bogota&country=co"
 {
@@ -194,7 +179,6 @@ user@user:~$ curl "http://127.0.0.1:5000/weather?city=bogota&country=co"
 }
 ```
 
->e.g.
 ```
 user@user:~$ curl -s -I "http://127.0.0.1:5000/weather?city=bogota&country=co"
 HTTP/1.0 200 OK
@@ -236,9 +220,9 @@ Response:  {
 
 8. The response must include the content-type header (application/JSON) :heavy_check_mark: :heavy_check_mark:
 
-9. Functions must be tested :construction:
+9. Functions must be tested :heavy_check_mark: :heavy_check_mark:
 
-10. Keep a cache of 2 minutes of the data. You can use a persistent layer for this. :heavy_check_mark: :heavy_check_mark:
+10. Keep a cache of 2 minutes of the data. You can use a persistent layer for this. :heavy_check_mark: :x:
 
 
 ## Reference links
