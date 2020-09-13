@@ -60,10 +60,21 @@ $ pip3 install flask flask-caching python-dotenv
 ```
 $ flask run
 ```
+Check that in your console appears something like that:
+```
+ * Serving Flask app "app.py" (lazy loading)
+ * Environment: development
+ * Debug mode: on
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 155-460-756
+```
+After, please stop the app with <kbd>ctrl</kbd> + <kbd>C</kbd>.
 
 2.8 Deactivate the virtual env.
 ```
-deactivate
+$ deactivate
 ```
 
 ### 3. Dot enviroment configuration
@@ -74,10 +85,10 @@ deactivate
 $ cd my-weather-api/api-core/
 ```
 
-3.2 Edit the `new.env` file and put the requerired URL and key for the OpenWeather API of [Current Weather Data](https://openweathermap.org/current). e.g.<br>
+3.2 Edit the `new.env` file and put the requerired URL and key for the OpenWeatherMap API of [Current Weather Data](https://openweathermap.org/current). Here a example, that you can use only for testing purpose.<br>
 ```
-api_url='http://api.openweathermap.org/data/2.5/weather?q='
-api_key='1234a5b6789c2357d111d31ef7192989'
+API_URL='http://api.openweathermap.org/data/2.5/weather?q='
+API_KEY='130c6e79354386b51a46509341685172'
 ```
 
 3.3 After that, save it and rename the file like this:
