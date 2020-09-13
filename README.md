@@ -18,10 +18,12 @@ $ python3 --version
 
 1.2 If Python isn't installed, please check this [article](https://docs.python-guide.org/starting/install3/linux/).
 
-1.3 Install Python Virtual Environment, a manager of enviroment for Python packages.
+1.3 Install Python Virtual Environment (a manager of enviroment for Python packages).
 ```
 $ sudo apt-get install python3-venv
 ```
+
+1.4 In this step, you should be downloaded or clonated this [repository](https://github.com/afforeroc/my-weather-api). :)
 
 ### 2. Python enviroment configuration
 > Only once before you run the app
@@ -36,12 +38,12 @@ $ cd my-weather-api/api-core/
 $ python3 -m venv env
 ```
 
-2.3 Activate the environment.
+2.3 Activate the created virtual environment.
 ```
 $ source env/bin/activate
 ```
 
-2.4 Updating Pip for the virtual env.
+2.4 Updating Pip for the virtual environment.
 ```
 $ pip3 install --upgrade pip
 ```
@@ -56,10 +58,16 @@ $ pip3 --version
 $ pip3 install flask flask-caching python-dotenv
 ```
 
-2.7 Test in console that flask app is only running.
+2.7 Test in your terminal/console that the flask app is only running.<br>
+You can use:
 ```
 $ flask run
 ```
+Or this:
+```
+$ python3 app.py
+```
+
 Check that in your console appears something like that:
 ```
  * Serving Flask app "app.py" (lazy loading)
@@ -70,7 +78,7 @@ Check that in your console appears something like that:
  * Debugger is active!
  * Debugger PIN: 155-460-756
 ```
-After, please stop the app with <kbd>ctrl</kbd> + <kbd>C</kbd>.
+After, that please stop the app with <kbd>ctrl</kbd> + <kbd>C</kbd>.
 
 2.8 Deactivate the virtual env.
 ```
@@ -85,7 +93,7 @@ $ deactivate
 $ cd my-weather-api/api-core/
 ```
 
-3.2 Edit the `new.env` file and put the requerired URL and key for the OpenWeatherMap API of [Current Weather Data](https://openweathermap.org/current). Here a example, that you can use only for testing purpose.<br>
+3.2 Edit the `new.env` file and put the requerired `API_URL` and `API_KEY` of your [Current Weather](https://openweathermap.org/current) API of OpenWeatherMap. Here a example, that you can use only for testing purpose.<br>
 ```
 API_URL='http://api.openweathermap.org/data/2.5/weather?q='
 API_KEY='130c6e79354386b51a46509341685172'
@@ -96,7 +104,7 @@ API_KEY='130c6e79354386b51a46509341685172'
 [before] new.env -> [after] .new
 ```
 
-3.4 If you want to modified the flask env, only modify `.flaskenv` file.
+3.4 ALso, if you want to modify the Flask enviroment, only edit the content of `.flaskenv` file.
 
 ### 4. Run the app
 > Every time when you run the app
@@ -194,7 +202,7 @@ Date: Fri, 11 Sep 2020 07:09:45 GMT
 ```
 
 ## Development: features status
-Feactures completed and pending to construct.
+Feactures of this weather API.
 
 1. GET /weather?city=$City&country=$Country :heavy_check_mark: :heavy_check_mark:
 ```
@@ -227,7 +235,7 @@ Response:  {
 
 9. Functions must be tested :heavy_check_mark: :heavy_check_mark:
 
-10. Keep a cache of 2 minutes of the data. You can use a persistent layer for this. :heavy_check_mark: :x:
+10. Keep a cache of 2 minutes of the data. You can use a persistent layer for this. :heavy_check_mark:
 
 
 ## Reference links
