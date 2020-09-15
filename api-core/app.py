@@ -18,9 +18,7 @@ app.config['JSON_SORT_KEYS'] = False  # Avoid unwanted JSON key order
 app.config['JSON_AS_ASCII'] = False  # JSON in utf-8 format
 
 # Cache initialization to mantain
-requests_cache.install_cache('weather_cache',
-                             backend='sqlite',
-                             expire_after=120)
+requests_cache.install_cache('cache', backend='sqlite', expire_after=120)
 
 
 #/weather?city=$City&country=$Country => API URL format to make the request
