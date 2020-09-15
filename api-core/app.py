@@ -4,7 +4,6 @@
 import requests
 import requests_cache
 from flask import Flask, request, jsonify
-#from flask_caching import Cache
 import validators  # Functions to check variables and route args.
 import webfunctions  # Functions to manipulate JSON and date time.
 
@@ -20,14 +19,9 @@ app.config['JSON_AS_ASCII'] = False  # JSON in utf-8 format
 
 # Cache initialization to mantain
 requests_cache.install_cache('weather_cache', backend='sqlite', expire_after=120)
-#cache = Cache()
-#app.config['CACHE_TYPE'] = 'simple'
-#cache.init_app(app)
-
 
 #/weather?city=$City&country=$Country => API URL format to make the request
 @app.route('/weather', methods=['GET'])
-#@cache.cached(120)  # 2 minutes of cache. Doesn't captured the args changes :(
 def weather():
     """The weather route of My Weather API."""
     # Load URL and KEY args of Current Weather API of OpenWeatherMap
@@ -44,11 +38,11 @@ def weather():
     validators.check_regex('city', city, "[A-Za-z ]+")
     validators.check_regex('country', country, "[a-z]{2}")
 
-    # Join the city and country args like input for 'request_ow_api' function
-    place = webfunctions.get_place(city, country)
+    # Construct URL request of Current Weather API of OpenWeatherMap
+    url = "{0}{1},{2}&units=metric&appid={3}".format(api_url, city, country, api_key)
 
     # Obtain response from Current Weather API of OpenWeatherMap
-    input_json = webfunctions.request_ow_api(api_url, api_key, place)
+    input_json = requests.get(url).json()
 
     # Debugging: print the 'input_json' data in good style
     # webfunctions.beautiful_json(input_json)

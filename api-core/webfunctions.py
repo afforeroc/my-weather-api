@@ -15,18 +15,6 @@ def get_place(city, country):
     return f"{city},{country}"
 
 
-def request_ow_api(api_url, api_key, city_country):
-    """Request weather data from OpenWeatherMap API."""
-    metric_req = '&units=metric&appid='
-    request_api = str(api_url) + str(city_country) + metric_req + str(api_key)
-    try:
-        response = urllib.request.urlopen(request_api).read()
-        resp_json = json.loads(response)
-    except urllib.error.HTTPError as exception:
-        resp_json = json.loads(exception.read())
-    return resp_json
-
-
 def reply_bad_response(input_json):
     """ The bad response will be same that it was obtained from OpenWeatherMap."""
     if str(input_json['cod']) != '200':
@@ -36,13 +24,16 @@ def reply_bad_response(input_json):
         abort(bad_response)
 
 
-def get_now_datetime_unix():
+def get_datetime_from_unix(now, input_json=None, arg=None):
     """Return current datetime from the current unix timestamp."""
-    now_datetime_utc = datetime.utcnow()
-    now_datetime_ut = calendar.timegm(now_datetime_utc.utctimetuple())
-    now_datetime_ts = datetime.fromtimestamp(now_datetime_ut)
-    now_datetime = now_datetime_ts.strftime('%Y-%m-%d %H:%M:%S')
-    return now_datetime
+    if now:
+        datetime_utc = datetime.utcnow()
+        datetime_ut = calendar.timegm(datetime_utc.utctimetuple())
+    else:
+        datetime_ut = input_json[arg]
+    datetime_ts = datetime.fromtimestamp(datetime_ut)
+    requested_datetime = datetime_ts.strftime('%Y-%m-%d %H:%M:%S')
+    return requested_datetime
 
 
 # Debug function to see data_json in console.
@@ -97,8 +88,7 @@ def create_response_body(input_json):
     coord_lat = str(input_json['coord']['lat'])
     sunrise_hour = get_hour_time(input_json, 'sys', 'sunrise')
     sunset_hour = get_hour_time(input_json, 'sys', 'sunset')
-    #requested_time = get_requested_time(input_json, 'dt')
-    requested_time = get_now_datetime_unix()
+    requested_time = get_datetime_from_unix(0, input_json, 'dt')
 
     output_json = {
         "location_name": f"{city_name}, {country_code}",
