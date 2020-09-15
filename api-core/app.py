@@ -18,7 +18,10 @@ app.config['JSON_SORT_KEYS'] = False  # Avoid unwanted JSON key order
 app.config['JSON_AS_ASCII'] = False  # JSON in utf-8 format
 
 # Cache initialization to mantain
-requests_cache.install_cache('weather_cache', backend='sqlite', expire_after=120)
+requests_cache.install_cache('weather_cache',
+                             backend='sqlite',
+                             expire_after=120)
+
 
 #/weather?city=$City&country=$Country => API URL format to make the request
 @app.route('/weather', methods=['GET'])
@@ -39,7 +42,8 @@ def weather():
     validators.check_regex('country', country, "[a-z]{2}")
 
     # Construct URL request of Current Weather API of OpenWeatherMap
-    url = "{0}{1},{2}&units=metric&appid={3}".format(api_url, city, country, api_key)
+    url = "{0}{1},{2}&units=metric&appid={3}".format(api_url, city, country,
+                                                     api_key)
 
     # Obtain response from Current Weather API of OpenWeatherMap
     input_json = requests.get(url).json()

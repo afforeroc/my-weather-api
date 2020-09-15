@@ -4,7 +4,6 @@
 from datetime import datetime
 import calendar
 import json
-import urllib.request
 from flask import make_response, jsonify, abort
 
 
