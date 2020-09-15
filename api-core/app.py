@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 """My Weather API that uses Flask framework and Current Weather API of OpenWeatherMap."""
 
+import requests
+import requests_cache
 from flask import Flask, request, jsonify
-from flask_caching import Cache
+#from flask_caching import Cache
 import validators  # Functions to check variables and route args.
 import webfunctions  # Functions to manipulate JSON and date time.
 
@@ -17,9 +19,10 @@ app.config['JSON_SORT_KEYS'] = False  # Avoid unwanted JSON key order
 app.config['JSON_AS_ASCII'] = False  # JSON in utf-8 format
 
 # Cache initialization to mantain
-cache = Cache()
-app.config['CACHE_TYPE'] = 'simple'
-cache.init_app(app)
+requests_cache.install_cache('weather_cache', backend='sqlite', expire_after=120)
+#cache = Cache()
+#app.config['CACHE_TYPE'] = 'simple'
+#cache.init_app(app)
 
 
 #/weather?city=$City&country=$Country => API URL format to make the request
